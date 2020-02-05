@@ -17,20 +17,13 @@ namespace Read_Screen_Text
         public MainForm()
         {
             InitializeComponent();
+            lblProgress.Text = string.Empty;
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
-        public Image SnipImage { get => pbImageCapture.Image; set => pbImageCapture.Image = value; }
-        public string TextFromImage
-        {
-            get => rtTextFromImage.Text;
-            set
-            {
-                rtTextFromImage.Clear();
-                rtTextFromImage.AppendText(value);
-            }
-        }
+        private Image snipImage;
 
+        private string textFromImage;
         private void btnCapture_Click(object sender, EventArgs e)
         {
             btnCapture.Enabled = false;
@@ -46,25 +39,17 @@ namespace Read_Screen_Text
                         using (Graphics graphics = Graphics.FromImage(image))
                         {
                             graphics.CopyFromScreen(new Point(bound.Left, bound.Top), Point.Empty, bound.Size);
-                            SnipImage = image.Clone() as Image;
+                            snipImage = image.Clone() as Image;
+                            pbImageCapture.Image = snipImage;
                         }
                     }
 
                     pbImageCapture.Width = bound.Width;
                     pbImageCapture.Height = bound.Height;
                     this.Width = Math.Max(bound.Width + 40, 600);
-                    this.Height = bound.Height + 200;
+                    this.Height = bound.Height + 300;
 
-                    var ReadTextThread = new Thread(() =>
-                    {
-                        var Orc = new AutoOcr();
-                        var content = Orc.Read(SnipImage).Text;
-                        if (string.IsNullOrWhiteSpace(content))
-                            content = "Can't read anything";
-                        TextFromImage = content;
-                        btnCapture.Enabled = true;
-                    });
-                    ReadTextThread.Start();
+                    bwExtractText.RunWorkerAsync();
                 }
                 this.Show();
             }
@@ -72,7 +57,31 @@ namespace Read_Screen_Text
 
         private void bwExtractText_DoWork(object sender, DoWorkEventArgs e)
         {
+            bwExtractText.ReportProgress(0);
+            var Orc = new AutoOcr();
+            bwExtractText.ReportProgress(50);
+            textFromImage = Orc.Read(snipImage).Text;
+            bwExtractText.ReportProgress(90, textFromImage);
+            if (string.IsNullOrWhiteSpace(textFromImage))
+                textFromImage = "Can't read anything";
+            bwExtractText.ReportProgress(100);
+        }
 
+        private void bwExtractText_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressMain.Value = e.ProgressPercentage;
+            lblProgress.Text = $"Loading {e.ProgressPercentage}% ...";
+
+            if(e.ProgressPercentage == 90)
+            {
+                rtTextFromImage.Text = textFromImage;
+            }
+        }
+
+        private void bwExtractText_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            lblProgress.Text = "Completed";
+            btnCapture.Enabled = true;
         }
     }
 }
