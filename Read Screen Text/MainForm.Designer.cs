@@ -39,9 +39,9 @@
             // 
             // btnCapture
             // 
-            this.btnCapture.Location = new System.Drawing.Point(14, 14);
+            this.btnCapture.Location = new System.Drawing.Point(14, 15);
             this.btnCapture.Name = "btnCapture";
-            this.btnCapture.Size = new System.Drawing.Size(87, 27);
+            this.btnCapture.Size = new System.Drawing.Size(87, 29);
             this.btnCapture.TabIndex = 0;
             this.btnCapture.Text = "Capture";
             this.btnCapture.UseVisualStyleBackColor = true;
@@ -49,9 +49,9 @@
             // 
             // pbImageCapture
             // 
-            this.pbImageCapture.Location = new System.Drawing.Point(14, 178);
+            this.pbImageCapture.Location = new System.Drawing.Point(14, 190);
             this.pbImageCapture.Name = "pbImageCapture";
-            this.pbImageCapture.Size = new System.Drawing.Size(560, 23);
+            this.pbImageCapture.Size = new System.Drawing.Size(560, 25);
             this.pbImageCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImageCapture.TabIndex = 1;
             this.pbImageCapture.TabStop = false;
@@ -61,24 +61,26 @@
             this.rtTextFromImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtTextFromImage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtTextFromImage.Location = new System.Drawing.Point(14, 47);
+            this.rtTextFromImage.Location = new System.Drawing.Point(14, 50);
             this.rtTextFromImage.Name = "rtTextFromImage";
-            this.rtTextFromImage.Size = new System.Drawing.Size(560, 125);
+            this.rtTextFromImage.Size = new System.Drawing.Size(560, 133);
             this.rtTextFromImage.TabIndex = 2;
             this.rtTextFromImage.Text = "";
             // 
             // bwExtractText
             // 
             this.bwExtractText.WorkerReportsProgress = true;
+            this.bwExtractText.WorkerSupportsCancellation = true;
             this.bwExtractText.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwExtractText_DoWork);
             this.bwExtractText.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwExtractText_ProgressChanged);
             this.bwExtractText.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwExtractText_RunWorkerCompleted);
             // 
             // progressMain
             // 
-            this.progressMain.Location = new System.Drawing.Point(238, 14);
+            this.progressMain.Location = new System.Drawing.Point(238, 28);
             this.progressMain.Name = "progressMain";
-            this.progressMain.Size = new System.Drawing.Size(334, 27);
+            this.progressMain.Size = new System.Drawing.Size(334, 16);
+            this.progressMain.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressMain.TabIndex = 3;
             // 
             // lblProgress
@@ -86,23 +88,23 @@
             this.lblProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(118, 20);
+            this.lblProgress.Location = new System.Drawing.Point(235, 9);
             this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(55, 15);
+            this.lblProgress.Size = new System.Drawing.Size(60, 16);
             this.lblProgress.TabIndex = 4;
             this.lblProgress.Text = "Progress";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 183);
+            this.ClientSize = new System.Drawing.Size(584, 195);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.progressMain);
             this.Controls.Add(this.rtTextFromImage);
             this.Controls.Add(this.pbImageCapture);
             this.Controls.Add(this.btnCapture);
-            this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MainForm";
             this.Text = "Read Screen Text";
             ((System.ComponentModel.ISupportInitialize)(this.pbImageCapture)).EndInit();

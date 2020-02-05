@@ -17,7 +17,11 @@ namespace Read_Screen_Text
         public MainForm()
         {
             InitializeComponent();
+
             lblProgress.Text = string.Empty;
+
+            progressMain.Style = ProgressBarStyle.Continuous;
+            progressMain.Value = 0;
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
@@ -26,7 +30,31 @@ namespace Read_Screen_Text
         private string textFromImage;
         private void btnCapture_Click(object sender, EventArgs e)
         {
-            btnCapture.Enabled = false;
+            if (btnCapture.Text == "Capture")
+            {
+                btnCapture.Text = "Cancel";
+                SnipScreen();
+                if (snipImage != null)
+                {
+                    progressMain.Style = ProgressBarStyle.Marquee;
+                    progressMain.Value = 30;
+                    bwExtractText.RunWorkerAsync();
+                }
+            }
+            else
+            {
+                if (bwExtractText.IsBusy)
+                    bwExtractText.CancelAsync();
+                btnCapture.Text = "Capture";
+
+                progressMain.Style = ProgressBarStyle.Continuous;
+                progressMain.Value = 0;
+                lblProgress.Text = "Cancel";
+            }
+        }
+
+        private void SnipScreen()
+        {
             using (SnippingForm form = new SnippingForm())
             {
                 this.Hide();
@@ -40,7 +68,7 @@ namespace Read_Screen_Text
                         {
                             graphics.CopyFromScreen(new Point(bound.Left, bound.Top), Point.Empty, bound.Size);
                             snipImage = image.Clone() as Image;
-                            pbImageCapture.Image = snipImage;
+                            pbImageCapture.Image = image.Clone() as Image;
                         }
                     }
 
@@ -48,8 +76,6 @@ namespace Read_Screen_Text
                     pbImageCapture.Height = bound.Height;
                     this.Width = Math.Max(bound.Width + 40, 600);
                     this.Height = bound.Height + 300;
-
-                    bwExtractText.RunWorkerAsync();
                 }
                 this.Show();
             }
@@ -69,19 +95,28 @@ namespace Read_Screen_Text
 
         private void bwExtractText_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressMain.Value = e.ProgressPercentage;
-            lblProgress.Text = $"Loading {e.ProgressPercentage}% ...";
-
-            if(e.ProgressPercentage == 90)
+            switch(e.ProgressPercentage)
             {
-                rtTextFromImage.Text = textFromImage;
+                case 0:
+                    lblProgress.Text = "Starting...";
+                    break;
+                case 50:
+                    lblProgress.Text = "Reading text...";
+                    break;
+                case 90:
+                    lblProgress.Text = "Updating...";
+                    rtTextFromImage.Text = textFromImage;
+                    break;
             }
         }
 
         private void bwExtractText_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             lblProgress.Text = "Completed";
-            btnCapture.Enabled = true;
+            btnCapture.Text = "Capture";
+
+            progressMain.Style = ProgressBarStyle.Continuous;
+            progressMain.Value = 0;
         }
     }
 }
