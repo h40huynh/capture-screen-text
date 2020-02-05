@@ -16,6 +16,8 @@ namespace Read_Screen_Text
         private Point _CurrentPosition;
         private bool _IsDrawing;
 
+        public Rectangle BoundRectangle;
+
         public SnippingForm()
         {
             InitializeComponent();
@@ -38,6 +40,7 @@ namespace Read_Screen_Text
             if(_IsDrawing)
             {
                 _IsDrawing = false;
+                BoundRectangle = GetRectangle();
                 this.DialogResult = DialogResult.OK;
             }
         }

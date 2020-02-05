@@ -30,6 +30,7 @@
         {
             this.btnCapture = new System.Windows.Forms.Button();
             this.pbImageCapture = new System.Windows.Forms.PictureBox();
+            this.rtTextFromImage = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbImageCapture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,17 +46,27 @@
             // 
             // pbImageCapture
             // 
-            this.pbImageCapture.Location = new System.Drawing.Point(12, 41);
+            this.pbImageCapture.Location = new System.Drawing.Point(12, 135);
             this.pbImageCapture.Name = "pbImageCapture";
-            this.pbImageCapture.Size = new System.Drawing.Size(569, 279);
+            this.pbImageCapture.Size = new System.Drawing.Size(569, 185);
+            this.pbImageCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImageCapture.TabIndex = 1;
             this.pbImageCapture.TabStop = false;
+            // 
+            // rtTextFromImage
+            // 
+            this.rtTextFromImage.Location = new System.Drawing.Point(93, 12);
+            this.rtTextFromImage.Name = "rtTextFromImage";
+            this.rtTextFromImage.Size = new System.Drawing.Size(488, 117);
+            this.rtTextFromImage.TabIndex = 2;
+            this.rtTextFromImage.Text = "";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(593, 332);
+            this.Controls.Add(this.rtTextFromImage);
             this.Controls.Add(this.pbImageCapture);
             this.Controls.Add(this.btnCapture);
             this.Name = "MainForm";
@@ -69,6 +80,7 @@
 
         private System.Windows.Forms.Button btnCapture;
         private System.Windows.Forms.PictureBox pbImageCapture;
+        private System.Windows.Forms.RichTextBox rtTextFromImage;
     }
 }
 
