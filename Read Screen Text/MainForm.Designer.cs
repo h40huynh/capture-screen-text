@@ -48,13 +48,14 @@
             // 
             this.pbImageCapture.Location = new System.Drawing.Point(12, 135);
             this.pbImageCapture.Name = "pbImageCapture";
-            this.pbImageCapture.Size = new System.Drawing.Size(569, 185);
+            this.pbImageCapture.Size = new System.Drawing.Size(569, 37);
             this.pbImageCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImageCapture.TabIndex = 1;
             this.pbImageCapture.TabStop = false;
             // 
             // rtTextFromImage
             // 
+            this.rtTextFromImage.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtTextFromImage.Location = new System.Drawing.Point(93, 12);
             this.rtTextFromImage.Name = "rtTextFromImage";
             this.rtTextFromImage.Size = new System.Drawing.Size(488, 117);
@@ -65,7 +66,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 332);
+            this.ClientSize = new System.Drawing.Size(593, 191);
             this.Controls.Add(this.rtTextFromImage);
             this.Controls.Add(this.pbImageCapture);
             this.Controls.Add(this.btnCapture);

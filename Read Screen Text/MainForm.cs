@@ -17,25 +17,34 @@ namespace Read_Screen_Text
         {
             InitializeComponent();
             presenter = new Presenter(this);
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         public Image SnipImage { get => pbImageCapture.Image; set => pbImageCapture.Image = value; }
-        public string TextFromImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string TextFromImage
+        {
+            get => rtTextFromImage.Text;
+            set
+            {
+                rtTextFromImage.Clear();
+                rtTextFromImage.AppendText(value);
+            }
+        }
 
         private void btnCapture_Click(object sender, EventArgs e)
         {
             using (SnippingForm form = new SnippingForm())
             {
                 this.Hide();
-                if(form.ShowDialog() == DialogResult.OK)
+                if (form.ShowDialog() == DialogResult.OK)
                 {
                     Rectangle bound = form.BoundRectangle;
                     presenter.GetScreenShot(bound);
 
                     pbImageCapture.Width = bound.Width;
                     pbImageCapture.Height = bound.Height;
-                    this.Width = bound.Width + 40;
-                    this.Height = bound.Height + 100;
+                    this.Width = Math.Max(bound.Width + 40, 400);
+                    this.Height = bound.Height + 200;
                 }
                 this.Show();
             }
