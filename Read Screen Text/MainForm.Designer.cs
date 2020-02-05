@@ -31,14 +31,15 @@
             this.btnCapture = new System.Windows.Forms.Button();
             this.pbImageCapture = new System.Windows.Forms.PictureBox();
             this.rtTextFromImage = new System.Windows.Forms.RichTextBox();
+            this.bwExtractText = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pbImageCapture)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCapture
             // 
-            this.btnCapture.Location = new System.Drawing.Point(12, 12);
+            this.btnCapture.Location = new System.Drawing.Point(14, 14);
             this.btnCapture.Name = "btnCapture";
-            this.btnCapture.Size = new System.Drawing.Size(75, 23);
+            this.btnCapture.Size = new System.Drawing.Size(87, 27);
             this.btnCapture.TabIndex = 0;
             this.btnCapture.Text = "Capture";
             this.btnCapture.UseVisualStyleBackColor = true;
@@ -46,30 +47,37 @@
             // 
             // pbImageCapture
             // 
-            this.pbImageCapture.Location = new System.Drawing.Point(12, 135);
+            this.pbImageCapture.Location = new System.Drawing.Point(12, 153);
             this.pbImageCapture.Name = "pbImageCapture";
-            this.pbImageCapture.Size = new System.Drawing.Size(569, 37);
+            this.pbImageCapture.Size = new System.Drawing.Size(560, 23);
             this.pbImageCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImageCapture.TabIndex = 1;
             this.pbImageCapture.TabStop = false;
             // 
             // rtTextFromImage
             // 
+            this.rtTextFromImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtTextFromImage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtTextFromImage.Location = new System.Drawing.Point(93, 12);
+            this.rtTextFromImage.Location = new System.Drawing.Point(124, 12);
             this.rtTextFromImage.Name = "rtTextFromImage";
-            this.rtTextFromImage.Size = new System.Drawing.Size(488, 117);
+            this.rtTextFromImage.Size = new System.Drawing.Size(448, 125);
             this.rtTextFromImage.TabIndex = 2;
             this.rtTextFromImage.Text = "";
             // 
+            // bwExtractText
+            // 
+            this.bwExtractText.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwExtractText_DoWork);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 191);
+            this.ClientSize = new System.Drawing.Size(584, 160);
             this.Controls.Add(this.rtTextFromImage);
             this.Controls.Add(this.pbImageCapture);
             this.Controls.Add(this.btnCapture);
+            this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MainForm";
             this.Text = "Read Screen Text";
             ((System.ComponentModel.ISupportInitialize)(this.pbImageCapture)).EndInit();
@@ -82,6 +90,7 @@
         private System.Windows.Forms.Button btnCapture;
         private System.Windows.Forms.PictureBox pbImageCapture;
         private System.Windows.Forms.RichTextBox rtTextFromImage;
+        private System.ComponentModel.BackgroundWorker bwExtractText;
     }
 }
 

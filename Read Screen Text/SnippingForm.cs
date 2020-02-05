@@ -27,6 +27,7 @@ namespace Read_Screen_Text
             this.ShowInTaskbar = false;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Cursor = Cursors.Cross;
+            this.DoubleBuffered = true;
         }
 
         private void SnippingForm_MouseDown(object sender, MouseEventArgs e)
